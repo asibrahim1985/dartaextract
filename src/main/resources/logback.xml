@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  
+  <property name="LOG_FILE" value="BioScoreAndData.log" />
+  <property name="LOG_DIR" value="./logs/" />
+  <appender name="FILE_LOG_APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	  <file>${LOG_DIR}/${LOG_FILE}</file> 
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	        <fileNamePattern>${LOG_DIR}/%d{yyyy/MM/dd}/${LOG_FILE}.gz</fileNamePattern>
+	        <totalSizeCap>3GB</totalSizeCap>
+	    </rollingPolicy>
+	    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+	        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+	    </encoder>
+  </appender> 
+  
+  <!--<logger name="org.springframework.web.client" level="WARN" /> -->
+  <root level="info" >
+    <appender-ref ref="FILE_LOG_APP" /> 
+    <appender-ref ref="STDOUT" /> 
+  </root>
+</configuration>
